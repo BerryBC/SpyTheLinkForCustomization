@@ -4,7 +4,7 @@
 @Version: 0.5.1
 @Date: 2020-02-02 11:15:41
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-09 15:01:46
+@LastEditTime : 2020-02-09 16:42:30
 '''
 
 from Lib.LMongoDB import claMongoDB
@@ -108,7 +108,7 @@ def funSpyWeb(eleWeb, strInRURL, strInTag):
             strhtml = browserChorme.page_source
 
             if strhtml != '<html><head></head><body></body></html>':
-                time.sleep(int(intRequestTimeout*2))
+                time.sleep(int(intRequestTimeout*5))
                 strhtml = browserChorme.page_source
                 browserChorme.close()
                 browserChorme.quit()
@@ -116,15 +116,16 @@ def funSpyWeb(eleWeb, strInRURL, strInTag):
                 aFromWeb = soup.select('a')
                 for eleA in aFromWeb:
                     strSpyURL = eleA.get('href')
-                    if not strSpyURL is None:
-                        if strSpyURL[:4] != 'http':
-                            if strSpyURL[1] == '/':
-                                objAddPage.AddToDB('https:'+strSpyURL)
-                            elif strSpyURL[0] == '/':
-                                objAddPage.AddToDB(
-                                    'https://'+strInRURL+strSpyURL)
-                        elif strSpyURL[:4] == 'http':
-                            objAddPage.AddToDB(strSpyURL)
+                    if not strSpyURL is None and len(strSpyURL):
+                        if len(strSpyURL)>4:
+                            if strSpyURL[:4] != 'http':
+                                if strSpyURL[1] == '/':
+                                    objAddPage.AddToDB('https:'+strSpyURL)
+                                elif strSpyURL[0] == '/':
+                                    objAddPage.AddToDB(
+                                        'https://'+strInRURL+strSpyURL)
+                            elif strSpyURL[:4] == 'http':
+                                objAddPage.AddToDB(strSpyURL)
                 arrWebP = soup.select(strInTag)
                 objAddPage.AddPContent(arrWebP)
                 # print(arrWebP)

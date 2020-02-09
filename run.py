@@ -4,7 +4,7 @@
 @Version: 0.5.1
 @Date: 2020-02-02 11:15:41
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-09 13:00:15
+@LastEditTime : 2020-02-09 13:14:24
 '''
 
 from Lib.LMongoDB import claMongoDB
@@ -43,7 +43,9 @@ def funSpyReusablePage():
     print(' Entry begin : '+time.strftime('%Y-%m-%d %H:%M:%S'))
     curTarget = objLinkDB.LoadAllData('pagedb-Custom')
     for eleTarget in curTarget:
-        funSpyWeb(eleTarget['eURL'])
+        strRURL = eleTarget['rURL']
+        strTag = eleTarget['tag']
+        funSpyWeb(eleTarget['eURL'], strRURL, strTag)
     threading.Timer(60*intReusableRepeatTime, funSpyReusablePage).start()
     print(' Entry end : '+time.strftime('%Y-%m-%d %H:%M:%S'))
 

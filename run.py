@@ -4,7 +4,7 @@
 @Version: 0.5.1
 @Date: 2020-02-02 11:15:41
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-09 16:42:30
+@LastEditTime : 2020-02-09 17:09:20
 '''
 
 from Lib.LMongoDB import claMongoDB
@@ -58,7 +58,7 @@ def funSpyNewPage():
         strRURL = eleRoot['rURL']
         strTag = eleRoot['tag']
         curTarget = objLinkDB.LoadRandomLimit(
-            'pagedb-Crawled', {'ct': {'$regex': strRURL, '$options': "i"}, 'ced': False}, intHowManyPageOneTime)
+            'pagedb-Crawled', {'url': {'$regex': strRURL, '$options': "i"}, 'ced': False}, intHowManyPageOneTime)
         for eleTarget in curTarget:
             objLinkDB.UpdateOneData(
                 'pagedb-Crawled', {'_id': eleTarget['_id']}, {'ced': True})

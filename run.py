@@ -118,7 +118,7 @@ def funSpyWeb(eleWeb, strInRURL, strInTag):
                 aFromWeb = soup.select('a')
                 for eleA in aFromWeb:
                     strSpyURL = eleA.get('href')
-                    if not strSpyURL is None and len(strSpyURL):
+                    if not strSpyURL is None :
                         if len(strSpyURL)>4:
                             if strSpyURL[:4] != 'http':
                                 if strSpyURL[1] == '/':

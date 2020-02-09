@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-02 14:24:17
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-09 00:19:02
+@LastEditTime : 2020-02-09 15:02:26
 '''
 import time
 
@@ -31,6 +31,7 @@ class claAddPage(object):
                     dictNewPage['url'] = strCleanURL
                     dictNewPage['d'] = intDepth
                     self.objMongoDB.InsertOne('pagedb-Crawled', dictNewPage)
+                    # print(strCleanURL)
 
     def AddPContent(self, arrTagP):
         # print('   成功爬了一个网站')

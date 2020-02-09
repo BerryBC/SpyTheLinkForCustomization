@@ -4,7 +4,7 @@
 @Version: 0.5.1
 @Date: 2020-02-02 11:15:41
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-09 14:35:23
+@LastEditTime : 2020-02-09 15:01:46
 '''
 
 from Lib.LMongoDB import claMongoDB
@@ -116,24 +116,32 @@ def funSpyWeb(eleWeb, strInRURL, strInTag):
                 aFromWeb = soup.select('a')
                 for eleA in aFromWeb:
                     strSpyURL = eleA.get('href')
-                    if strSpyURL is not None and strSpyURL[:4] != 'http':
-                        if strSpyURL[1] == '/':
-                            objAddPage.AddToDB('https:'+strSpyURL)
-                        elif strSpyURL[0] == '/':
-                            objAddPage.AddToDB('https://'+strInRURL+strSpyURL)
-                    elif strSpyURL[:4] == 'http':
-                        objAddPage.AddToDB(strSpyURL)
+                    if not strSpyURL is None:
+                        if strSpyURL[:4] != 'http':
+                            if strSpyURL[1] == '/':
+                                objAddPage.AddToDB('https:'+strSpyURL)
+                            elif strSpyURL[0] == '/':
+                                objAddPage.AddToDB(
+                                    'https://'+strInRURL+strSpyURL)
+                        elif strSpyURL[:4] == 'http':
+                            objAddPage.AddToDB(strSpyURL)
                 arrWebP = soup.select(strInTag)
                 objAddPage.AddPContent(arrWebP)
+                # print(arrWebP)
                 bolRetry = False
+                # print("  After " + str(intTryTime) +
+                #     " time, success reach " + eleWeb)
             else:
                 intTryTime += 1
                 browserChorme.close()
                 browserChorme.quit()
+                # print('    Fail ' + str(intTryTime) + ' time')
         except Exception as e:
             intTryTime += 1
             browserChorme.close()
             browserChorme.quit()
+            # print(" Get method error : " + str(e))
+            # print('    Fail ' + str(intTryTime) + ' time')
 
 
 if __name__ == "__main__":

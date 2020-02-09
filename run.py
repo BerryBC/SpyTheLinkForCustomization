@@ -4,7 +4,7 @@
 @Version: 0.5.1
 @Date: 2020-02-02 11:15:41
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-09 17:30:39
+@LastEditTime : 2020-02-09 21:09:19
 '''
 
 from Lib.LMongoDB import claMongoDB
@@ -17,6 +17,7 @@ import asyncio
 import aiohttp
 import threading
 import time
+import random
 
 strCfgPath = './cfg/dbCfg.ini'
 objLinkDB = claMongoDB(strCfgPath, 'mongodb')
@@ -98,7 +99,8 @@ def funSpyWeb(eleWeb, strInRURL, strInTag):
             options.add_argument('--start-maximized')
             options.add_argument('--disable-infobars')
 
-            options.add_argument('--proxy-server='+strProxyToSpy)
+            if random.randint(0,60)!=33:
+                options.add_argument('--proxy-server='+strProxyToSpy)
             browserChorme = webdriver.Chrome(
                 '/usr/bin/chromedriver', chrome_options=options)
             browserChorme.set_page_load_timeout(intRequestTimeout)

@@ -4,7 +4,7 @@
 @Version: 0.5.1
 @Date: 2020-02-02 11:15:41
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-09 17:09:20
+@LastEditTime : 2020-02-09 17:30:39
 '''
 
 from Lib.LMongoDB import claMongoDB
@@ -108,7 +108,7 @@ def funSpyWeb(eleWeb, strInRURL, strInTag):
             strhtml = browserChorme.page_source
 
             if strhtml != '<html><head></head><body></body></html>':
-                time.sleep(int(intRequestTimeout*5))
+                time.sleep(int(intRequestTimeout*4))
                 strhtml = browserChorme.page_source
                 browserChorme.close()
                 browserChorme.quit()
